@@ -1,0 +1,47 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+    {% if department %}
+        {{ department.description|truncatewords:155 }}
+    {% endif %}
+{% endblock %}
+{% block title %}
+
+        Sign up -College Store
+
+{% endblock %}
+{% block content %}
+
+    <body class="body-login">
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <div>
+    <form class="form1" action="{% url 'storeapp:register' %}" method="post">
+        {% csrf_token %}
+        <h3>Sign up</h3>
+
+
+        <input class="input" type="text" placeholder="username" name="username" required>
+        <input class="input" type="text" placeholder="first name" name="first_name">
+        <input class="input" type="text" placeholder="last name" name="last_name">
+        <input class="input" type="email" placeholder="Email" name="email">
+        <input class="input" type="password" placeholder="Password" name="password" required>
+        <input class="input" type="password" placeholder="Confirm Password" name="confirm_password" required>
+        {% for k in messages %}
+        <h6 style="text-color:white;">{{k}}</h6>
+        {% endfor %}
+
+        <button type="submit" class="but">Sign up</button>
+
+    </form>
+
+    </div>
+    </body>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,42 @@
+<div>
+<nav class="navbar navbar-expand-lg my-nav ">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav ">
+      <li class="nav-item active">
+          <a class="btn btn-home" href="{% url 'storeapp:home' %}">Home</a>
+      </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle btn-home" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Departments
+        </a>
+
+           <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+            {% for cat in links %}
+          <a class="dropdown-item" href="{{ cat.get_url }}">{{ cat.name }}</a>
+            {% endfor %}
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+    <ul class="navbar-nav ">
+         {% if user.is_authenticated %}
+        <ul class="nav-item active">
+            <a style="margin-right: 15px;" class="btn-user" href="">Hello {{user.username|upper}}</a>
+            <a style="margin-right: 15px;" class="btn btn-home" href="{% url 'storeapp:logout' %}">Logout</a>
+            <a style="margin-right: 15px;" class="btn btn-home" href="{% url 'storeapp:form' %}">form</a>
+
+             {% else %}
+             <a style="margin-right: 15px;" class="btn btn-home" href="{% url 'storeapp:login' %}">Login</a>
+        </ul>
+    </ul>
+
+         {% endif %}
+
+
+</nav>
+</div>

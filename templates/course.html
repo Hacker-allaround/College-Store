@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+    {% if department %}
+        {{ department.description|truncatewords:155 }}
+    {% endif %}
+{% endblock %}
+{% block title %}
+   {% if course %}
+        {{ course.name}} -College Store
+    {% endif %}
+{% endblock %}
+{% block content %}
+<body class="bodyfordep">
+<div class="container">
+  <br>
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+        <div style="min-width:18rem;">
+            <img src="{{course.image.url}}" alt="{{course.name}}">
+        </div>
+    </div>
+
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <div>
+            <h1 class="head-title">{{course.name|upper}}</h1>
+            <p class="mytitle"><b>{{course.department|upper}}</b></p>.
+            <p class="mysubtitle"><u>Description</u></p>
+            <p class="mytext">{{course.description}}</p>
+            {% if course.Seat_availability <= 0 %}
+            <p class="text-justify my_prod_text"><b>All seat are filled</b></p>
+            {% else %}
+            {% endif %}
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+</body>
+{% endblock %}

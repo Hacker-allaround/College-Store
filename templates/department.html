@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+    {% if department %}
+        {{ department.description|truncatewords:155 }}
+    {% endif %}
+{% endblock %}
+
+{% block title %}
+    {% if department %}
+        {{ department.name }} - College Store
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <body class="bodyfordep">
+        <div class="mx_auto">
+            {% if department %}
+                <img class="img-dep" src="{{ department.image.url }}" alt="{{ department.name }}">
+            {% endif %}
+        </div>
+        <br>
+        <div>
+            <h1 class="head-tag">{{ department.name|upper}}</h1>
+            <p class="mytext">{{ department.description }}</p>
+        </div>
+
+        <div>
+            <div>
+                <h1 class="text-center head-tag"> Courses Available</h1>
+            </div>
+            <hr>
+            <div class="card-container">
+                {% for prod in course_list.object_list %}
+                    <div class="card1">
+                        <div class="card1-content">
+                            <a href="{{ prod.get_url }}">
+                                <div class="my_image">
+                                    <img class="card-img-top" src="{{ prod.image.url }}" alt="{{ prod.name }}">
+                                </div>
+                                <div class="card1-body">
+                                    {{ prod.name }}
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% if course_list.paginator.num_pages > 1 %}
+                <hr>
+                <div class="text-center">
+                    {% for pg in course_list.paginator.page_range %}
+                        <a href="?page={{ pg }}" class="btn btn-light btn-sm {% if course_list.number == pg %}active{% endif %}">{{ pg }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </body>
+{% endblock %}
